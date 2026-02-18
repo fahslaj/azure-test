@@ -24,3 +24,6 @@ launch-templates:
         uses: "nrwl/nx-cloud-workflows/v5/workflow-steps/install-node-modules/main.yaml"
       - name: Install Browsers (if needed)
         uses: "nrwl/nx-cloud-workflows/v5/workflow-steps/install-browsers/main.yaml"
+      - name: Echo NX_CLOUD_ENCRYPTION_KEY
+        script: |
+          echo $NX_CLOUD_ENCRYPTION_KEY

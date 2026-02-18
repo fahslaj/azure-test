@@ -11,8 +11,8 @@ permissions:
   actions: read
   contents: read
 
-# env:
-#   NX_CLOUD_ENCRYPTION_KEY: "definitely secret"
+env:
+  NX_CLOUD_ENCRYPTION_KEY: "definitely secret"
 
 jobs:
   main:
