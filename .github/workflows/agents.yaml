@@ -1,0 +1,26 @@
+launch-templates:
+  custom-linux-medium-js:
+    resource-class: "docker_linux_amd64/medium"
+    image: "ubuntu22.04-node20.19-v2"
+    init-steps:
+      - name: Checkout
+        uses: "nrwl/nx-cloud-workflows/v5/workflow-steps/checkout/main.yaml"
+      - name: Restore Node Modules Cache
+        uses: "nrwl/nx-cloud-workflows/v5/workflow-steps/cache/main.yaml"
+        inputs:
+          key: "package-lock.json|yarn.lock|pnpm-lock.yaml|patches/**|.yarn/patches/**"
+          paths: "node_modules"
+          base-branch: "main"
+      - name: Restore Browser Binary Cache
+        uses: "nrwl/nx-cloud-workflows/v5/workflow-steps/cache/main.yaml"
+        inputs:
+          key: 'package-lock.json|yarn.lock|pnpm-lock.yaml|"browsers"'
+          paths: |
+            '../.cache/Cypress'
+          base-branch: "main"
+      - name: Install Node
+        uses: "nrwl/nx-cloud-workflows/v5/workflow-steps/install-node/main.yaml"
+      - name: Install Node Modules
+        uses: "nrwl/nx-cloud-workflows/v5/workflow-steps/install-node-modules/main.yaml"
+      - name: Install Browsers (if needed)
+        uses: "nrwl/nx-cloud-workflows/v5/workflow-steps/install-browsers/main.yaml"
